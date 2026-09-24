@@ -1,4 +1,4 @@
-package com.abrarshakhi.messman.ui.theme
+package com.abrarshakhi.messman.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

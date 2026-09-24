@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MessMan"
 include(":app")
+include(":core")
