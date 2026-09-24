@@ -1,5 +1,0 @@
-<resources>
-
-    <style name="Base.Theme.MessManagementApp" parent="Theme.Material3.DayNight.NoActionBar">
-    </style>
-</resources>

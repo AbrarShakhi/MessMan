@@ -1,10 +1,22 @@
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.kotlin
+.externalNativeBuild
+.cxx
+
 # Built application files
 *.apk
 *.ap_
 output.json
 output-metadata.json
-
-google-services.json
 
 # Files for the ART/Dalvik VM
 *.dex
