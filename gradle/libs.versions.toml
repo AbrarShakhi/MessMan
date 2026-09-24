@@ -9,8 +9,6 @@ activityCompose = "1.13.0"
 kotlin = "2.4.20"
 composeBom = "2026.09.00"
 jetbrainsKotlinJvm = "2.4.20"
-appcompat = "1.8.0"
-material = "1.14.0"
 navigation3 = "1.2.0"
 koinBom = "4.2.2"
 kotlinxCoroutines = "1.11.0"
@@ -35,8 +33,6 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 androidx-lifecycle-viewmodel-navigation3 = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "lifecycleRuntimeKtx" }
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3" }
 androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }

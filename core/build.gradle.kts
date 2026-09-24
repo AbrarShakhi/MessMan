@@ -35,7 +35,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
-    implementation(libs.androidx.navigation3.runtime)
+    api(libs.androidx.navigation3.runtime) // AppRouteKey (a NavKey) and AppNavGraph expose its types
     implementation(libs.androidx.navigation3.ui)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)

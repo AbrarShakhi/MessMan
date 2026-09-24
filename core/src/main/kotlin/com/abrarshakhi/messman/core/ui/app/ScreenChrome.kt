@@ -17,9 +17,5 @@ class ScreenChrome(
     val topBar: @Composable (ChromeScope) -> Unit = {},
     val fab: @Composable (ChromeScope) -> Unit = {},
     val immersive: Boolean = false,
-    val bottomBar: BottomBarKey? = null, // If null then screen does show bottom bar, else show desired botomBar.
+    val bottomBar: BottomBarKey? = null,
 )
-
-fun AppRouteKey.chrome(): ScreenChrome = when (this) {
-    is AppRouteKey.HOME -> ScreenChrome() // Home from each feature. place default wight now.
-}

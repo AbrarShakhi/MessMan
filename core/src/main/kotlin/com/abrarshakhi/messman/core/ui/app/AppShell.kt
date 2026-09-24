@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import com.abrarshakhi.messman.core.ui.navigation.AppNavGraph
 import com.abrarshakhi.messman.core.ui.navigation.AppNavigation
 import com.abrarshakhi.messman.core.ui.navigation.AppRouteKey
 import com.abrarshakhi.messman.core.ui.navigation.BottomBar
@@ -28,10 +29,10 @@ import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppShell(startRoute: AppRouteKey, viewModel: AppViewModel) {
+fun AppShell(startRoute: AppRouteKey, navGraph: AppNavGraph, viewModel: AppViewModel) {
     val backStack = rememberAppBackStack(startRoute)
     val current = backStack.currentRoute()
-    val chrome = current?.chrome()
+    val chrome = current?.let(navGraph.chrome)
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val chromeScope = ChromeScope(backStack, current, scrollBehavior)
@@ -64,15 +65,15 @@ fun AppShell(startRoute: AppRouteKey, viewModel: AppViewModel) {
         contentWindowInsets = WindowInsets.safeDrawing,
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = { chrome?.topBar?.invoke(chromeScope) },
-        bottomBar = {
-            chrome?.bottomBar?.let {
-                BottomBar(it, backStack)
-            }
-        },
         floatingActionButton = { chrome?.fab?.invoke(chromeScope) },
+        bottomBar = {
+            chrome?.bottomBar?.BottomBar(navGraph.bottomBarItems, backStack)
+        },
     ) { innerPadding ->
         AppNavigation(
-            backStack = backStack, modifier = Modifier.padding(innerPadding)
+            backStack = backStack,
+            entries = navGraph.entries,
+            modifier = Modifier.padding(innerPadding),
         )
     }
 }

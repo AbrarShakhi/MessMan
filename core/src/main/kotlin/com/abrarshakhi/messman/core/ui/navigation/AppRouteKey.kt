@@ -3,9 +3,6 @@ package com.abrarshakhi.messman.core.ui.navigation
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-interface BottomBarKey
-
-
 @Serializable
 sealed interface AppRouteKey : NavKey {
 

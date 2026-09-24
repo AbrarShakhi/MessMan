@@ -1,7 +1,7 @@
-package com.abrarshakhi.messman.core
+package com.abrarshakhi.messman
 
 import android.app.Application
-import com.abrarshakhi.messman.core.di.appModules
+import com.abrarshakhi.messman.di.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
