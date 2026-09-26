@@ -12,7 +12,10 @@ These are decided.
 - **NFR-PLAT-03** Gradle modules follow `:app` → `:feature:*` → `:core`. Features never depend on each other (see `CLAUDE.md`).
 - **NFR-PLAT-04** The backend is Supabase: Auth (email and password), the Postgres database, and Realtime. The app talks to Supabase directly; there is no separate server.
 - **NFR-PLAT-05** Supabase has no push notification service, so push needs Firebase Cloud Messaging (or a similar service), triggered from Supabase.
-- **NFR-PLAT-06** Time-based rules run on the server on a schedule and must not depend on any phone being online. These are the end of a grace period, late fines, and due-date reminders.
+- **NFR-PLAT-06** Time-based rules run on the server on a schedule and must not depend on any phone being online:
+  - closing each month at midnight after its last day, and making it final 24 hours later
+  - manager handovers and leaving members, which take effect on the 1st
+  - late fines and due-date reminders
 
 ## 2. Security and privacy (NFR-SEC)
 
@@ -38,9 +41,12 @@ These are decided.
 
 - **NFR-DATA-01** Money is stored as exact decimal values (e.g. Postgres `numeric`, Kotlin `BigDecimal`), never as `Float` or `Double`. Amounts have 2 decimal places.
 - **NFR-DATA-02** The server calculates the meal rate, balances, charges and fines with one set of rules, so every phone shows the same numbers. Offline screens show the last synced numbers.
-- **NFR-DATA-03** Time-based rules use the server's clock, not the phone's. This covers locks, the 24-hour grace period, due dates and fines. Days follow the mess's time zone (A6).
+- **NFR-DATA-03** Time-based rules use the server's clock, not the phone's. This covers month boundaries, locks, the 24-hour grace period, due dates and fines. Days and months follow the mess's time zone (A6).
 - **NFR-DATA-04** Uploading the same offline entry twice never creates two entries. Each entry gets its ID on the phone when it is created.
-- **NFR-DATA-05** The calculation rules have automated tests, including the example in FR section 12 and the manager-change example in FR-PAY-06.
+- **NFR-DATA-05** The calculation and date rules have automated tests, including:
+  - the example in FR section 12
+  - the manager-change example in FR-PAY-06
+  - month boundaries: 28-, 29-, 30- and 31-day months, leap years, and midnight in the mess's time zone
 - **NFR-DATA-06** Database changes are made through versioned migration files kept in the repository.
 
 ## 4. Performance (NFR-PERF)
@@ -50,11 +56,11 @@ Measured on a mid-range phone on a 4G connection (N3).
 - **NFR-PERF-01** Cold start to a usable screen takes under 2 seconds.
 - **NFR-PERF-02** A change made by one member appears on other online members' screens within 3 seconds.
 - **NFR-PERF-03** Saving a meal count or a grocery entry responds within 1 second, or shows progress. The UI never freezes during network work.
-- **NFR-PERF-04** A period report for a 50-member mess loads within 2 seconds.
+- **NFR-PERF-04** A monthly report for a 50-member mess loads within 2 seconds.
 
 ## 5. Capacity (NFR-CAP)
 
-- **NFR-CAP-01** A mess supports up to 50 members (N4), 4 meal times a day, and periods of any length.
+- **NFR-CAP-01** A mess supports up to 50 members (N4) and 4 meal times a day.
 - **NFR-CAP-02** A mess keeps its full history for as long as the mess exists.
 - **NFR-CAP-03** The first release targets Supabase's free plan. Before launch, check its limits, such as database size and pausing inactive projects, and upgrade the plan if needed.
 
@@ -81,7 +87,7 @@ Measured on a mid-range phone on a 4G connection (N3).
   - colors meet WCAG AA contrast
 - **NFR-UX-05** When the server rejects an action, the app explains why in plain words, for example:
   - a locked meal time
-  - a closed period
+  - a closed month
   - an ended grace period
   - an outstanding balance that blocks leaving
 
@@ -95,7 +101,7 @@ Measured on a mid-range phone on a 4G connection (N3).
 ## 9. Maintainability and testing (NFR-MAINT)
 
 - **NFR-MAINT-01** Feature code follows the module and screen structure described in `CLAUDE.md`: Route, Screen, ViewModel, UiState and Action.
-- **NFR-MAINT-02** Automated tests prove the access rules. For example, a member can't read or change another mess's data, and a non-manager can't start or close a period.
+- **NFR-MAINT-02** Automated tests prove the access rules. For example, a member can't read or change another mess's data, and a non-manager can't lock a meal time.
 - **NFR-MAINT-03** The calculation rules are unit-tested (NFR-DATA-05).
 
 ## 10. Assumptions to confirm
