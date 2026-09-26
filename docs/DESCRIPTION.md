@@ -67,8 +67,9 @@ They will get remember before expire date so that they don't get fined.
 
 #### Secure Cloud Backup & Sync across devices.
 Data will be stored in clouds.
-Member can entry grocery offline. when they go offline they should be synced. 
-edge-case: member entered grocery offline, manager closed month, grocery tries to sync. it will be rejected.
+Member can entry grocery offline. when they go offline they should be synced.
+Real meal count will online, and if meal time is locked. then meal count will be rejected.
+edge-case: member entered grocery offline, manager closed month + 24 hours grace period ended, grocery tries to sync. it will be rejected.
 Real-time Synchronization: Ensuring all members and admins see updated meal and expense data instantly across multiple devices.
 Caching/buffering data in local storage such that users can view/update records even if the internet is unavailable for certain operation.
 Synchronize any buffered data once the internet connection is available.
